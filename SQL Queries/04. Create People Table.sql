@@ -1,4 +1,4 @@
--- Creates the Prizes table
+-- Creates the People table
 
 USE [Tournamnets]
 GO
@@ -9,22 +9,16 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Prizes](
+CREATE TABLE [dbo].[People](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[PlaceNumber] [int] NOT NULL,
-	[PlaceName] [nvarchar](50) NOT NULL,
-	[PrizeAmount] [money] NOT NUll,
-	[PrizePercentage] [float] NOT Null,
-CONSTRAINT [PK_Prizes] PRIMARY KEY CLUSTERED
+	[FirstName] [nvarchar] (100) NOT NULL,
+	[LastName] [nvarchar] (100) NOT NULL,
+	[EmailAddress] [nvarchar](200) NOT NULL,
+	[CellphoneNumber] [varchar] (20),
+CONSTRAINT [PK_People] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) 
 )ON [PRIMARY]
 
-GO
-
-ALTER TABLE [dbo].[Prizes] ADD CONSTRAINT [DF_Prizes_PrizeAmount] DEFAULT ((0)) FOR [PrizeAmount]
-GO
-
-ALTER TABLE [dbo].[Prizes] ADD CONSTRAINT [DF_Prizes_PrizesPercentage] DEFAULT ((0)) FOR [PrizePercentage]
 GO
