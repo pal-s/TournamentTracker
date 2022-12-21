@@ -36,7 +36,7 @@
             this.placeNameLabel = new System.Windows.Forms.Label();
             this.prizeAmountValue = new System.Windows.Forms.TextBox();
             this.prizeAmountLabel = new System.Windows.Forms.Label();
-            this.pizePercentageValue = new System.Windows.Forms.TextBox();
+            this.prizePercentageValue = new System.Windows.Forms.TextBox();
             this.prizePercentageLabel = new System.Windows.Forms.Label();
             this.orLabel = new System.Windows.Forms.Label();
             this.createPrizeButton = new System.Windows.Forms.Button();
@@ -107,12 +107,12 @@
             this.prizeAmountLabel.TabIndex = 21;
             this.prizeAmountLabel.Text = "Prize Amount";
             // 
-            // pizePercentageValue
+            // prizePercentageValue
             // 
-            this.pizePercentageValue.Location = new System.Drawing.Point(307, 383);
-            this.pizePercentageValue.Name = "pizePercentageValue";
-            this.pizePercentageValue.Size = new System.Drawing.Size(257, 35);
-            this.pizePercentageValue.TabIndex = 24;
+            this.prizePercentageValue.Location = new System.Drawing.Point(307, 383);
+            this.prizePercentageValue.Name = "prizePercentageValue";
+            this.prizePercentageValue.Size = new System.Drawing.Size(257, 35);
+            this.prizePercentageValue.TabIndex = 24;
             // 
             // prizePercentageLabel
             // 
@@ -149,6 +149,7 @@
             this.createPrizeButton.TabIndex = 26;
             this.createPrizeButton.Text = "Create Prize";
             this.createPrizeButton.UseVisualStyleBackColor = true;
+            this.createPrizeButton.Click += new System.EventHandler(this.createPrizeButton_Click);
             // 
             // CreatePrizeForm
             // 
@@ -158,7 +159,7 @@
             this.ClientSize = new System.Drawing.Size(638, 615);
             this.Controls.Add(this.createPrizeButton);
             this.Controls.Add(this.orLabel);
-            this.Controls.Add(this.pizePercentageValue);
+            this.Controls.Add(this.prizePercentageValue);
             this.Controls.Add(this.prizePercentageLabel);
             this.Controls.Add(this.prizeAmountValue);
             this.Controls.Add(this.prizeAmountLabel);
@@ -186,7 +187,7 @@
         private Label placeNameLabel;
         private TextBox prizeAmountValue;
         private Label prizeAmountLabel;
-        private TextBox pizePercentageValue;
+        private TextBox prizePercentageValue;
         private Label prizePercentageLabel;
         private Label orLabel;
         private Button createPrizeButton;
