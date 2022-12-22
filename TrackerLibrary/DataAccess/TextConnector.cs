@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TrackerLibrary.Models;
 
-namespace TrackerLibrary
+namespace TrackerLibrary.DataAccess
 {
     public class TextConnector : IDataConnection
     {
@@ -14,7 +14,7 @@ namespace TrackerLibrary
         {
             model.Id = 1;
 
-            return model; 
+            return model;
         }
     }
 }
