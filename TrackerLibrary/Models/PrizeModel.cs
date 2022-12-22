@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrackerLibrary
+namespace TrackerLibrary.Models
 {
     /// <summary>
     /// Represent the prize in the tournament.
@@ -46,11 +46,11 @@ namespace TrackerLibrary
             PlaceName = placeName;
 
             int placeNumberValue = 0;
-            int.TryParse(placeNumber,out placeNumberValue);
+            int.TryParse(placeNumber, out placeNumberValue);
             PlaceNumber = placeNumberValue;
 
             decimal prizeAmountValue = 0;
-            decimal.TryParse(prizeAmount,out prizeAmountValue);
+            decimal.TryParse(prizeAmount, out prizeAmountValue);
             PrizeAmount = prizeAmountValue;
 
             double prizePercentageValue = 0;
