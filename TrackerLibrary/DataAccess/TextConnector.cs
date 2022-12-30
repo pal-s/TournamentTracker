@@ -11,6 +11,12 @@ namespace TrackerLibrary.DataAccess
     public class TextConnector : IDataConnection
     {
         private const string PrizesFile = "PrizeModel.csv";
+
+        public PersonModel CreatePerson(PersonModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         // TODO - Wire up the CreatePrize for the text files.
         public PrizeModel CreatePrize(PrizeModel model)
         {
