@@ -32,6 +32,8 @@ namespace TrackerUI
 
                 GlobalConfig.Connection.CreatePerson(p);
 
+                MessageBox.Show("New Member has created.");
+
                 firstNameValue.Text = "";
                 lastNameValue.Text = "";
                 emailValue.Text = "";
