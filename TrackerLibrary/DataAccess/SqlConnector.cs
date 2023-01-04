@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TrackerLibrary.Models;
@@ -93,12 +94,30 @@ namespace TrackerLibrary.DataAccess
             }
         }
 
-        public List<PersonModel> GetPersonAll()
+        public List<PersonModel> GetPerson_All()
         {
             List<PersonModel> output;
             using(IDbConnection connnection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
                 output = connnection.Query<PersonModel>("dbo.spPeople_GetAll").ToList();
+            }
+            return output;
+        }
+
+        public List<TeamModel> GetTeam_All()
+        {
+            List<TeamModel> output;
+            using (IDbConnection connnection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                output = connnection.Query<TeamModel>("dbo.spTeam_GetAll").ToList();
+
+                foreach (TeamModel team in output)
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@TeamId", team.Id);
+
+                    team.TeamMembers = connnection.Query<PersonModel>("spTeamMembers_GetByTeam", p,commandType: CommandType.StoredProcedure).ToList();
+                }
             }
             return output;
         }

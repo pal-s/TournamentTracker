@@ -63,7 +63,7 @@ namespace TrackerLibrary.DataAccess
             return model;
         }
 
-        public List<PersonModel> GetPersonAll()
+        public List<PersonModel> GetPerson_All()
         {
             return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
         }
@@ -89,6 +89,11 @@ namespace TrackerLibrary.DataAccess
             teams.SaveToTeamFile(TeamFile);
 
             return model;
+        }
+
+        public List<TeamModel> GetTeam_All()
+        {
+            throw new NotImplementedException();
         }
     }
 }
