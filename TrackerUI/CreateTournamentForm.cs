@@ -104,5 +104,14 @@ namespace TrackerUI
                 WireUpLists();
             }
         }
+
+        private void createTournamentButton_Click(object sender, EventArgs e)
+        {
+            // Create Tournament entry
+            // Create all of the prizes entries
+            // Create all of the team entries
+
+            // Create our Matchups
+        }
     }
 }
