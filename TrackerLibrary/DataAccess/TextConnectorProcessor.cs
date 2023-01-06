@@ -97,6 +97,56 @@ namespace TrackerLibrary.DataAccess.TextHelpers
 
         }
 
+        public static List<TournamentModel> ConvertToTournamentModels(this List<string> lines, 
+                string teamFileName,
+                string peopleFileName,
+                string prizeFileName)
+        {
+            // 0 - Id
+            // 1 - TournamentName
+            // 2 - EntryFee
+            // 3 - List of Team Model Seperated by | symbol (Team Id)
+            // 4 - list of Prizes seperated by  | symbol
+            // 5 - List of List Matchup Model seperated by carot symbol.
+
+            //sample string
+            // 1, FirstTournament, 20, 2|3|6|7, 4|6|9, 1^1^5| 2^3^4
+
+            List<TournamentModel> output = new List<TournamentModel>();
+
+            List<TeamModel> team = teamFileName.FullFilePath().LoadFile().ConvertToTeamModels(peopleFileName);
+            List<PrizeModel> prize = prizeFileName.FullFilePath().LoadFile().ConvertToPrizeModels();
+
+            foreach (string line in lines)
+            {
+                TournamentModel tm = new TournamentModel();
+
+                string[] cols = line.Split(',');
+
+                tm.Id= int.Parse(cols[0]);
+                tm.TournamentName = cols[1];
+                tm.EntryFee = decimal.Parse(cols[2]);
+
+                string[] teamIds = cols[3].Split('|');
+
+                foreach (string t in teamIds)
+                {
+                    tm.EnteredTeams.Add( team.Where(x => x.Id == int.Parse(t) ).First());
+                }
+
+                string[] prizeIds= cols[4].Split('|');
+
+                foreach (string p in prizeIds)
+                {
+                    tm.Prizes.Add(prize.Where(x => x.Id == int.Parse(p)).First());
+                }
+
+
+                output.Add(tm);
+            }
+            return output;
+        }
+
         public static void SaveToPrizeFile(this List<PrizeModel> models, string fileName)
         {
             List<string> lines = new List<string>();
@@ -148,6 +198,53 @@ namespace TrackerLibrary.DataAccess.TextHelpers
 
             output = output.Substring(0, output.Length - 1);
             return output ;
+        }
+
+        public static void SaveToTournamentFile(this List<TournamentModel> models, string fileName)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (TournamentModel tm in models)
+            {
+                lines.Add($"{tm.Id},{tm.TournamentName},{tm.EntryFee},{ConvertTeamModelToString(tm.EnteredTeams)},{ConvertPrizeModelToString(tm.Prizes)},{ConvertMatchpToList(tm.Rounds)}");
+            }
+
+            File.WriteAllLines(fileName, lines);
+        }
+
+        private static string ConvertTeamModelToString(List<TeamModel> teams)
+        {
+            string output = "";
+
+            if (teams.Count == 0) { return output; }
+
+            foreach (TeamModel team in teams)
+            {
+                output += $"{team.Id}|";
+            }
+            output = output.Substring(0, output.Length - 1);
+            return output;
+        }
+
+        private static string ConvertPrizeModelToString(List<PrizeModel> prizes)
+        {
+            string output = "";
+
+            if (prizes.Count == 0)
+            {
+                return output;
+            }
+            foreach (PrizeModel prize in prizes)
+            {
+                output += $"{prize.Id}|";
+            }
+            output = output.Substring(0, output.Length - 1); 
+            return output;
+        }
+
+        private static string ConvertMatchpToList(List<List<MatchupModel>> matchup)
+        {
+            return "";
         }
     }
 }
