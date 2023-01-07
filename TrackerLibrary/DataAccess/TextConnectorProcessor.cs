@@ -147,6 +147,8 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             return output;
         }
 
+        //Save Model to file methods.
+
         public static void SaveToPrizeFile(this List<PrizeModel> models, string fileName)
         {
             List<string> lines = new List<string>();
@@ -182,6 +184,21 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             File.WriteAllLines(fileName.FullFilePath(),lines);
         }
 
+        public static void SaveToTournamentFile(this List<TournamentModel> models, string fileName)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (TournamentModel tm in models)
+            {
+                lines.Add($"{tm.Id},{tm.TournamentName},{tm.EntryFee},{ConvertTeamListToString(tm.EnteredTeams)},{ConvertPrizeListToString(tm.Prizes)},{ConvertMatchpListToString(tm.Rounds)}");
+            }
+
+            File.WriteAllLines(fileName, lines);
+        }
+
+
+        //Convert Model to string methods.
+
         private static string ConvertPeopleListToString(List<PersonModel> people)
         {
             string output = "";
@@ -200,19 +217,7 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             return output ;
         }
 
-        public static void SaveToTournamentFile(this List<TournamentModel> models, string fileName)
-        {
-            List<string> lines = new List<string>();
-
-            foreach (TournamentModel tm in models)
-            {
-                lines.Add($"{tm.Id},{tm.TournamentName},{tm.EntryFee},{ConvertTeamModelToString(tm.EnteredTeams)},{ConvertPrizeModelToString(tm.Prizes)},{ConvertMatchpToList(tm.Rounds)}");
-            }
-
-            File.WriteAllLines(fileName, lines);
-        }
-
-        private static string ConvertTeamModelToString(List<TeamModel> teams)
+        private static string ConvertTeamListToString(List<TeamModel> teams)
         {
             string output = "";
 
@@ -226,7 +231,7 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             return output;
         }
 
-        private static string ConvertPrizeModelToString(List<PrizeModel> prizes)
+        private static string ConvertPrizeListToString(List<PrizeModel> prizes)
         {
             string output = "";
 
@@ -242,7 +247,7 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             return output;
         }
 
-        private static string ConvertMatchpToList(List<List<MatchupModel>> matchup)
+        private static string ConvertMatchpListToString(List<List<MatchupModel>> matchup)
         {
             return "";
         }
