@@ -92,12 +92,14 @@ namespace TrackerLibrary.DataAccess
             return model;
         }
 
+        // Refactor Mothod 
+        // Return type is not necessary List<TeamModel>
         public List<TeamModel> GetTeam_All()
         {
             return TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
         }
 
-        public TournamentModel CreateTournament(TournamentModel model)
+        public void CreateTournament(TournamentModel model)
         {
 
             List<TournamentModel> tournaments = TournamnetFile.FullFilePath().LoadFile().ConvertToTournamentModels(TeamFile, PeopleFile, PrizesFile);
@@ -113,7 +115,6 @@ namespace TrackerLibrary.DataAccess
 
             tournaments.SaveToTournamentFile(TournamnetFile);
 
-            return model;
         }
     }
 }
