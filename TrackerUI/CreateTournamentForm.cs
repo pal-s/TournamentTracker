@@ -130,7 +130,6 @@ namespace TrackerUI
             tm.EnteredTeams = selectedTeams;
 
             // Wireup our Matchups
-
             TournamentLogic.CreateRounds(tm);
 
 
